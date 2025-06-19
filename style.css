@@ -1,0 +1,182 @@
+/* Reset Básico e Variáveis de Cor */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #000000;
+    --card-color: rgba(26, 26, 26, 0.7);
+    --text-color: #E0E0E0;
+    --primary-color: #9400D3; /* Roxo Vibrante (DarkViolet) */
+    --hover-glow: rgba(148, 0, 211, 0.5);
+    --border-color: rgba(148, 0, 211, 0.2);
+    --backdrop-blur: 10px;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+    cursor: none; /* Esconde o cursor padrão */
+}
+
+/* Canvas de Fundo */
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Cursor Customizado e Rastro */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: transform 0.1s ease-out;
+}
+
+.cursor-trail {
+    width: 3px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Efeito de Luz do Cursor */
+body::before {
+    content: '';
+    position: fixed;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(148, 0, 211, 0.1) 0%, transparent S0%);
+    pointer-events: none;
+    z-index: -1;
+    transition: top 0.1s ease-out, left 0.1s ease-out;
+}
+
+/* Container Principal */
+.container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Perfil */
+.profile {
+    margin-bottom: 2.5rem;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px var(--hover-glow);
+}
+
+.name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem; /* Aumentei um pouco o espaçamento */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.5; /* Melhora a legibilidade do texto de múltiplas linhas */
+    max-width: 90%; /* Evita que o texto toque as bordas em telas pequenas */
+    margin: 0 auto; /* Centraliza o texto */
+}
+
+/* Lista de Links */
+.links ul {
+    list-style: none;
+    margin-top: 2.5rem;
+}
+
+.links li {
+    margin: 1rem 0;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(var(--backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.link-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 25px var(--hover-glow);
+    color: #FFFFFF;
+}
+
+.link-item i {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+}
+
+.link-item:hover i {
+    color: #FFFFFF;
+}
+
+/* Rodapé */
+footer {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: #888;
+}
